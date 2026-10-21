@@ -32,6 +32,10 @@ Paste a meeting transcript with speaker labels and the generator pulls out decis
 - It does not transcribe audio - paste text from your recorder or captions export.
 - Review action items before sending minutes; a missed owner is worse than a missed task.
 
+## Python version (scikit-learn)
+
+A pro-grade rebuild with structured extraction (owners, due hints, decisions, questions) and a TF-IDF topic map lives in [`python-app/`](python-app/) - see its README for run steps. The browser demo above stays the zero-install option.
+
 ## Tech
 
 Vanilla JS, no build step, no dependencies, no network calls. Speaker-turn parsing, pattern-based decision/action/question detection, IDF-weighted summary scoring.
