@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Meeting Notes Generator - decisions, action items and minutes from any transcript</title>
+<meta name="description" content="Paste a meeting transcript and get clean minutes: decisions made, action items with owners, key topics and a summary. On-device, no API keys.">
+<meta name="theme-color" content="#ffffff">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./"><span class="brand-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="3.5" width="16" height="17" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="m16.5 15.5 1.2 1.2 2.3-2.5"/></svg></span><span>Meeting Notes Generator</span></a>
+    <nav class="site-nav">
+      <a class="nav-link" href="#input">Transcript</a>
+      <a class="nav-link" href="#minutes">Minutes</a>
+      <a class="nav-link" href="#limits">Limits</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn btn-ghost btn-icon" data-theme-toggle aria-label="Toggle dark mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg></button>
+      <button class="btn btn-ghost btn-icon menu-btn" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <section class="hero wrap rise" id="input">
+    <span class="hero-eyebrow">From rambling transcript to clean minutes</span>
+    <h1>Decisions and action items, pulled out for you</h1>
+    <p class="lede">Paste a meeting transcript with speaker labels. The generator finds decisions, action items with owners and deadlines, open questions, key topics and talk-share - then assembles minutes you can paste into a doc or export as markdown.</p>
+    <div class="row row-wrap mt16">
+      <button class="btn btn-primary btn-lg" id="btnSample">Process the sample meeting</button>
+      <label class="btn btn-ghost btn-lg" for="fileInput">Upload .txt</label>
+      <input type="file" id="fileInput" accept=".txt,.md" hidden>
+    </div>
+  </section>
+
+  <section class="wrap rise rise-1 mt16">
+    <div class="card card-pad-lg">
+      <h3 class="mb16">Transcript</h3>
+      <textarea class="input" id="transcript" rows="8" placeholder="Paste the transcript here, one speaker turn per line:&#10;&#10;Priya: Let's start with the launch date...&#10;Marcus: I reviewed the timeline and..."></textarea>
+      <div class="row row-wrap mt16">
+        <button class="btn btn-primary" id="btnGo">Generate minutes</button>
+        <span class="small muted" id="trStats"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap rise rise-2 mt24 hidden" id="minutes">
+    <div class="sec-head">
+      <div><h2>Minutes</h2><p class="muted" id="minMeta"></p></div>
+      <button class="btn btn-ghost btn-sm" id="btnExport">Export minutes</button>
+    </div>
+    <div class="grid grid-4 mb16" id="kpis"></div>
+    <div class="grid grid-2 mb16">
+      <div class="card card-pad-lg"><h3 class="mb16">Decisions</h3><div class="stack" id="decisions"><p class="muted small">None detected.</p></div></div>
+      <div class="card card-pad-lg"><h3 class="mb16">Action items</h3><div class="stack" id="actions"><p class="muted small">None detected.</p></div></div>
+    </div>
+    <div class="grid grid-2 mb16">
+      <div class="card card-pad-lg"><h3 class="mb16">Open questions</h3><div class="stack" id="questions"><p class="muted small">None detected.</p></div></div>
+      <div class="card card-pad-lg"><h3 class="mb16">Talk share</h3><div class="stack" id="talkShare"></div></div>
+    </div>
+    <div class="card card-pad-lg mb16">
+      <h3 class="mb16">Summary</h3>
+      <div class="stack" id="summary"></div>
+    </div>
+    <div class="card card-pad-lg">
+      <h3 class="mb16">Key topics</h3>
+      <div class="row row-wrap" id="topics"></div>
+    </div>
+  </section>
+
+  <section class="wrap rise rise-3 mt24 mb24" id="limits">
+    <div class="card card-pad-lg">
+      <h2 class="mb16">Honest limits</h2>
+      <ul class="cross-list">
+        <li>Rule-based extraction from written transcripts - it catches explicitly stated decisions and tasks, not implied ones.</li>
+        <li>Owner attribution comes from speaker labels; unlabeled transcripts still work but actions have no owner.</li>
+        <li>It does not transcribe audio - paste text from your recorder or captions export.</li>
+        <li>Review action items before sending minutes; a missed owner is worse than a missed task.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="wrap">Meeting Notes Generator - on-device transcript processing, no API keys</div></footer>
+<script src="ui.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
